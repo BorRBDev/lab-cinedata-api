@@ -35,6 +35,17 @@ async function top(req, res) {
     res.json(peliculas.map(p => p.resumen()));
 }
 
+async function estadisticas(req, res) {
+    // En Express 5 req.query es un getter: el toInt() del validador no persiste, hay que convertir aqui.
+    const crudo = req.query.minimo ?? 1;
+    const minimo = typeof crudo === "string" || typeof crudo === "number" ? Number(crudo) : NaN;
+    if (!Number.isInteger(minimo) || minimo < 1 || minimo > 50) {
+        return res.status(400).json({ error: "Los datos no son validos", detalles: ["minimo debe ser un entero entre 1 y 50"] });
+    }
+    const datos = await peliculasService.estadisticasPorGenero(minimo);
+    res.json(datos);
+}
+
 async function obtener(req, res) {
     const pelicula = await peliculasService.buscarPorId(req.params.id);
     if (!pelicula) {
@@ -85,4 +96,4 @@ async function crearResena(req, res){
 
 }
 
-module.exports = { listar, top, obtener, resenas, crear, actualizar, eliminar, crearResena };
+module.exports = { listar, top, estadisticas, obtener, resenas, crear, actualizar, eliminar, crearResena };

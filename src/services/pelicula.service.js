@@ -30,6 +30,16 @@ async function mejores(n = 3) {
   return Pelicula.find().sort({ nota: -1, titulo: 1}).limit(n);
 }
 
+async function estadisticasPorGenero(minimo = 1) {
+    return Pelicula.aggregate([
+        { $unwind: "$generos" },
+        { $group: { _id: "$generos", total: { $sum: 1 }, notaMedia: { $avg: "$nota" } } },
+        { $match: { total: { $gte: minimo } } },
+        { $project: { _id: 0, genero: "$_id", total: 1, notaMedia: { $round: ["$notaMedia", 1] } } },
+        { $sort: { notaMedia: -1, genero: 1 } }
+    ]);
+}
+
 async function buscarPorId(id) {
     return Pelicula.findById(id);
 }
@@ -56,4 +66,4 @@ function esIdValido(id) {
 
 
 
-module.exports = { listar, mejores, buscarPorId, esIdValido, crear, actualizar, eliminar };
+module.exports = { listar, mejores, estadisticasPorGenero, buscarPorId, esIdValido, crear, actualizar, eliminar };
