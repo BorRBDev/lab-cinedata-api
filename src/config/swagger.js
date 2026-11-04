@@ -47,6 +47,14 @@ const opciones = {
                         disponible: { type: "boolean", example: true }
                     }
                 },
+                EstadisticaGenero: {
+                    type: "object",
+                    properties: {
+                        genero: { type: "string", example: "Drama" },
+                        total: { type: "integer", example: 4 },
+                        notaMedia: { type: "number", example: 8.45 }
+                    }
+                },
                 Error: {
                     type: "object",
                     properties: {

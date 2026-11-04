@@ -35,6 +35,14 @@ async function top(req, res) {
     res.json(peliculas.map(p => p.resumen()));
 }
 
+// GET /peliculas/estadisticas
+async function estadisticas(req, res) {
+    // En Express 5 req.query es de solo lectura: el toInt() del validador no se refleja, se convierte aquí
+    const minimo = req.query.minimo !== undefined ? parseInt(req.query.minimo, 10) : undefined;
+    const datos = await peliculasService.estadisticasPorGenero(minimo);
+    res.json(datos);
+}
+
 async function obtener(req, res) {
     const pelicula = await peliculasService.buscarPorId(req.params.id);
     if (!pelicula) {
@@ -85,4 +93,4 @@ async function crearResena(req, res){
 
 }
 
-module.exports = { listar, top, obtener, resenas, crear, actualizar, eliminar, crearResena };
+module.exports = { listar, top, estadisticas, obtener, resenas, crear, actualizar, eliminar, crearResena };
