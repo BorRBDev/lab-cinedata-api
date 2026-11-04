@@ -1,0 +1,122 @@
+[
+    {
+        "titulo": "Interstellar",
+        "anio": 2014,
+        "generos": [
+            "Ciencia ficción",
+            "Drama"
+        ],
+        "nota": 8.7,
+        "duracion": 169,
+        "director": {
+            "nombre": "Christopher Nolan",
+            "pais": "Reino Unido"
+        },
+        "disponible": true
+    },
+    {
+        "titulo": "Coco",
+        "anio": 2017,
+        "generos": [
+            "Animación",
+            "Familia"
+        ],
+        "nota": 8.4,
+        "duracion": 105,
+        "director": {
+            "nombre": "Lee Unkrich",
+            "pais": "Estados Unidos"
+        },
+        "disponible": true
+    },
+    {
+        "titulo": "Parásitos",
+        "anio": 2019,
+        "generos": [
+            "Drama",
+            "Thriller"
+        ],
+        "nota": 8.5,
+        "duracion": 132,
+        "director": {
+            "nombre": "Bong Joon-ho",
+            "pais": "Corea del Sur"
+        },
+        "disponible": false
+    },
+    {
+        "titulo": "Origen",
+        "anio": 2010,
+        "generos": [
+            "Ciencia ficción",
+            "Acción"
+        ],
+        "nota": 8.8,
+        "duracion": 148,
+        "director": {
+            "nombre": "Christopher Nolan",
+            "pais": "Reino Unido"
+        },
+        "disponible": true
+    },
+    {
+        "titulo": "Up",
+        "anio": 2009,
+        "generos": [
+            "Animación",
+            "Aventura"
+        ],
+        "nota": 8.3,
+        "duracion": 96,
+        "director": {
+            "nombre": "Pete Docter",
+            "pais": "Estados Unidos"
+        },
+        "disponible": true
+    },
+    {
+        "titulo": "Whiplash",
+        "anio": 2014,
+        "generos": [
+            "Drama",
+            "Música"
+        ],
+        "nota": 8.5,
+        "duracion": 106,
+        "director": {
+            "nombre": "Damien Chazelle",
+            "pais": "Estados Unidos"
+        },
+        "disponible": false
+    },
+    {
+        "titulo": "Dune",
+        "anio": 2021,
+        "generos": [
+            "Ciencia ficción",
+            "Aventura"
+        ],
+        "nota": 8.0,
+        "duracion": 155,
+        "director": {
+            "nombre": "Denis Villeneuve",
+            "pais": "Canadá"
+        },
+        "disponible": true
+    },
+    {
+        "titulo": "El laberinto del fauno",
+        "anio": 2006,
+        "generos": [
+            "Fantasía",
+            "Drama"
+        ],
+        "nota": 8.2,
+        "duracion": 118,
+        "director": {
+            "nombre": "Guillermo del Toro",
+            "pais": "México"
+        },
+        "disponible": true
+    }
+]
