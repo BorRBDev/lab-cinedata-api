@@ -1,0 +1,6 @@
+Objetivo: añadir un workflow de GitHub Actions que ejecute los tests en cada pull request hacia main
+y en cada push a main.
+Contexto: los tests se lanzan con npm test y no necesitan base de datos.
+Restricciones: un solo archivo en .github/workflows/tests.yml. Node 20. Instala con npm ci.
+No toques nada más. No hagas commit.
+Hecho cuando: el archivo existe y npm ci && npm test funciona en local desde cero.

@@ -6,8 +6,7 @@ function construirFiltro({genero, anioDesde, notaMin, disponible}){
     if (genero) filtro.generos = genero;
     if (anioDesde) filtro.anio = {$gte: anioDesde};
     if (notaMin) filtro.nota = {$gte: notaMin};
-    if (disponible !== undefined) {filtro.disponible = disponible === "true";
-    console.log(disponible);}
+    if (disponible !== undefined) filtro.disponible = disponible;
     return filtro; 
 }
 
@@ -30,6 +29,18 @@ async function mejores(n = 3) {
   return Pelicula.find().sort({ nota: -1, titulo: 1}).limit(n);
 }
 
+// El _id (ObjectId) incluye la fecha de creación: _id descendente = últimas añadidas
+async function recientes(n = 10) {
+    return Pelicula.find().sort({ _id: -1 }).limit(n);
+}
+
+async function buscarPorTitulo(texto) {
+    const escapado = texto.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+    return Pelicula.find({ titulo: { $regex: escapado, $options: "i" } })
+        .sort({ anio: -1, titulo: 1 })
+        .limit(20);
+}
+
 async function buscarPorId(id) {
     return Pelicula.findById(id);
 }
@@ -41,7 +52,14 @@ async function crear(datos){
 
 // UPDATE
 async function actualizar(id, datos){
-    return Pelicula.findByIdAndUpdate(id, datos, { returnDocument: "after", runValidators: true});
+    // director se aplana a rutas con punto para no machacar el subdocumento entero
+    // si solo se envía director.pais
+    const { director, ...resto } = datos;
+    const cambios = { ...resto };
+    if (director) {
+        for (const [clave, valor] of Object.entries(director)) cambios[`director.${clave}`] = valor;
+    }
+    return Pelicula.findByIdAndUpdate(id, { $set: cambios }, { returnDocument: "after", runValidators: true});
 }
 
 //DELETE
@@ -56,4 +74,4 @@ function esIdValido(id) {
 
 
 
-module.exports = { listar, mejores, buscarPorId, esIdValido, crear, actualizar, eliminar };
+module.exports = { listar, mejores, recientes, buscarPorTitulo, buscarPorId, esIdValido, crear, actualizar, eliminar };
